@@ -12,5 +12,6 @@ pipeline {
                    sh 'touch  cicd_test.txt'
                    sh 'echo "git clone end22" > cicd_test.txt'
                }
+	    }   
         }
 }
