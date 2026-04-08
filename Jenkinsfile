@@ -1,16 +1,20 @@
 pipeline {
 	agent any
-	
+
+    environment {
+        strDockerImage="sunnykid7/cicd-test:0.1"
+    }
 	stages {
 	    stage('Github Pull') {
  	       steps {
 	           git branch: 'main',url:'https://github.com/sunnykid/cicd-test.git'
 	       } 
         }
-        stage('Git clone end') {
+        stage('Docker Image Build') {
             steps {
-                sh 'touch  cicd_test.txt'
-                sh 'echo "git clone end22" > cicd_test.txt'
+                script {
+                    oDockImage = docker.build(strDockerImage,"-f Dockerfile .")
+                }
             }
 	    }
         stage('Deploy Server') {
